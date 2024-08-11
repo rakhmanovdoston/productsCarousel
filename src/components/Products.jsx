@@ -5,7 +5,6 @@ export function Products() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     async function fetchingProducts() {
@@ -25,7 +24,7 @@ export function Products() {
       }
     }
     fetchingProducts();
-  });
+  }, []);
 
   const customTheme = {
     root: {
@@ -60,30 +59,41 @@ export function Products() {
     },
   };
 
+  const renderProductGroups = () => {
+    const groups = [];
+    for (let i = 0; i < products.length; i += 4) {
+      groups.push(products.slice(i, i + 4));
+    }
+    return groups;
+  };
+
   return (
     <main className="w-full min-h-screen p-10 items-center">
       <h1 className="text-center text-[32px] mb-10 animate-bounce">
         Products Carousel
       </h1>
-      <div className=" h-56  gap-4 sm:h-64 xl:h-80 2xl:h-96">
-        <Carousel theme={customTheme} className=" p-10">
-          {products &&
-            products.map((p) => {
-              return (
-                <div key={p.id} className="w-[700px] m-auto flex gap-10">
+      <div className="h-56 gap-4 sm:h-64 xl:h-80 2xl:h-96">
+        <Carousel theme={customTheme} className="p-10">
+          {renderProductGroups().map((group, index) => (
+            <div key={index} className="flex justify-center items-center gap-4">
+              {group.map((p) => (
+                <div
+                  key={p.id}
+                  className="w-[700px] m-auto flex gap-10 items-center"
+                >
                   <img
-                    className="w-[300px] h-[300px]"
-                    key={p.id}
+                    className="w-[150px] h-[150px]"
                     src={p.image}
                     alt={p.title}
                   />
-                  <article className="">
+                  <article>
                     <h2 className="text-lg">{p.title}</h2>
-                    <p className=" text-gray-600 font-bold">{`$${p.price}`}</p>
+                    <p className="text-gray-600 font-bold">{`$${p.price}`}</p>
                   </article>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+          ))}
         </Carousel>
       </div>
     </main>
