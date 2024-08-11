@@ -52,7 +52,7 @@ export function Products() {
     },
     control: {
       base: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-gray-500 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70 sm:h-10 sm:w-10 bg-gray-300",
-      icon: "h-5 w-5 text-white dark:text-gray-800 sm:h-6 sm:w-6",
+      icon: "bg-gray-300 rounded-full h-full w-full text-white dark:text-gray-800 sm:h-6 sm:w-6",
     },
     scrollContainer: {
       base: "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-lg",
